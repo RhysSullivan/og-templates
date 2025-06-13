@@ -1,21 +1,53 @@
+"use client";
 import * as React from "react";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
 import { BasicOGComponent } from "@/registry/components/open-graph/basic";
 import PreviewRenderer from "./preview";
+import {
+  BasicSkeleton,
+  NoticeSkeleton,
+  HeroSkeleton,
+  ImageRightSkeleton,
+  LogosSkeleton,
+} from "@/components/skeletons";
 
-// This page displays items from the custom registry.
-// You are free to implement this with your own design as needed.
+const templates = [
+  {
+    skeleton: <BasicSkeleton />,
+    tag: "basic",
+  },
+  {
+    skeleton: <NoticeSkeleton />,
+    tag: "notice",
+  },
+  {
+    skeleton: <HeroSkeleton />,
+    tag: "hero",
+  },
+  {
+    skeleton: <ImageRightSkeleton />,
+    tag: "image-right",
+  },
+  {
+    skeleton: <LogosSkeleton />,
+    tag: "logos",
+  },
+];
 
 export default function Home() {
   return (
     <div className="max-w-3xl mx-auto flex flex-col min-h-svh px-4 py-8 gap-8">
-      <header className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold tracking-tight">Custom Registry</h1>
-        <p className="text-muted-foreground">
-          A custom registry for distributing code using shadcn.
-        </p>
-      </header>
-      <main className="flex flex-col flex-1 gap-8">
+      <main className="flex flex-col flex-1 gap-8 pt-16">
+        <div className="flex flex-row gap-4 items-center justify-center">
+          {templates.map((template) => (
+            <div
+              key={template.tag}
+              className="border rounded-lg p-4 w-[230px] h-[130px]"
+            >
+              {template.skeleton}
+            </div>
+          ))}
+        </div>
         <div className="flex flex-col gap-4 border rounded-lg p-4 min-h-[450px] relative">
           <div className="flex items-center justify-between">
             <h2 className="text-sm text-muted-foreground sm:pl-3">
@@ -28,7 +60,7 @@ export default function Home() {
               <BasicOGComponent
                 background={{
                   type: "color",
-                  color: "#fff",
+                  color: "#000",
                   noise: 0.5,
                 }}
                 canvas={{ width: 1200, height: 630 }}
