@@ -21,7 +21,7 @@ export default function Home() {
             <h2 className="text-sm text-muted-foreground sm:pl-3">
               A simple hello world component
             </h2>
-            <OpenInV0Button name="hello-world" className="w-fit" />
+            <OpenInV0Button name="basic" className="w-fit" />
           </div>
           <div className="flex items-center justify-center min-h-[400px] relative">
             <PreviewRenderer>
