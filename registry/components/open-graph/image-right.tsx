@@ -1,179 +1,183 @@
 import { patterns } from "@/registry/lib/patterns";
-import { toBackgroundShorthand } from "@/registry/lib/templates/elements/background";
-import { ImageRightTemplate } from "@/registry/lib/templates/open-graph";
 import { absoluteUrl } from "@/registry/lib/url";
+import {
+  BackgroundParams,
+  Image,
+  CanvasParams,
+  Text,
+  toBackgroundShorthand,
+  backgroundDefault,
+  canvasDefault,
+} from "@/registry/lib/parameters";
 
-import { Watermark } from "../elements/watermark";
+type TemplateParams = {
+  canvas?: CanvasParams;
+  background?: BackgroundParams;
+  tag: Text;
+  title: Text;
+  logo?: Image;
+  image: Image;
+};
 
-export const ImageRightOGTemplate = ({
-  template,
-  renderWatermark,
-}: {
-  template: ImageRightTemplate;
-  renderWatermark: boolean;
-}) => (
-  <div
-    style={{
-      width: template.canvas.width,
-      height: template.canvas.height,
+export const ImageRightOGTemplate = (params: TemplateParams) => {
+  const canvas = params.canvas ?? canvasDefault;
+  const background = params.background ?? backgroundDefault;
 
-      background: toBackgroundShorthand(template.background),
-
-      display: "flex",
-      flexDirection: "column",
-    }}
-  >
+  return (
     <div
       style={{
-        height: "100%",
-        width: "100%",
+        width: canvas.width,
+        height: canvas.height,
 
-        position: "absolute",
-        inset: 0,
+        background: toBackgroundShorthand(background),
 
-        filter: "brightness(100%) contrast(150%)",
-        opacity: template.background.noise,
-        backgroundImage: `url('${absoluteUrl("/noise.svg")}')`,
-        backgroundRepeat: "repeat",
-      }}
-    ></div>
-
-    {template.background.gridOverlay && (
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          position: "absolute",
-          backgroundImage: `url('${patterns[
-            template.background.gridOverlay.pattern
-          ].svg({
-            color: template.background.gridOverlay.color,
-            opacity: template.background.gridOverlay.opacity,
-          })}')`,
-          maskImage:
-            template.background.gridOverlay.blurRadius > 0
-              ? `radial-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) ${
-                  100 - template.background.gridOverlay.blurRadius
-                }%)`
-              : "none",
-        }}
-      ></div>
-    )}
-
-    {template.params.logo.url && (
-      <div
-        style={{
-          display: "flex",
-
-          paddingTop: "2rem",
-          paddingLeft: "2rem",
-        }}
-      >
-        <img
-          style={{
-            height: "4rem",
-            width: "4rem",
-          }}
-          src={template.params.logo.url}
-        />
-      </div>
-    )}
-
-    <div
-      style={{
         display: "flex",
-        width: "100%",
-        gap: "1.5rem",
-
-        paddingLeft: "2rem",
+        flexDirection: "column",
       }}
     >
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          rowGap: "1.5rem",
-          flexShrink: 0,
+          height: "100%",
+          width: "100%",
 
-          width: "50%",
-          maxWidth: "50%",
+          position: "absolute",
+          inset: 0,
 
-          paddingTop: "4rem",
+          filter: "brightness(100%) contrast(150%)",
+          opacity: background.noise,
+          backgroundImage: `url('${absoluteUrl("/noise.svg")}')`,
+          backgroundRepeat: "repeat",
         }}
-      >
-        {template.params.tag.text && (
-          <div
-            style={{
-              display: "flex",
-              flexGrow: 0,
-            }}
-          >
-            <span
-              style={{
-                fontFamily: template.params.tag.fontFamily,
-                fontWeight: template.params.tag.fontWeight,
-                fontSize: `${template.params.tag.fontSize}px`,
-                color: template.params.tag.color,
+      ></div>
 
-                border: "solid",
-                borderRadius: "100",
-                borderWidth: "2px",
+      {background.gridOverlay && (
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            backgroundImage: `url('${patterns[
+              background.gridOverlay.pattern
+            ].svg({
+              color: background.gridOverlay.color,
+              opacity: background.gridOverlay.opacity,
+            })}')`,
+            maskImage:
+              background.gridOverlay.blurRadius > 0
+                ? `radial-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) ${
+                    100 - background.gridOverlay.blurRadius
+                  }%)`
+                : "none",
+          }}
+        ></div>
+      )}
 
-                paddingRight: "16px",
-                paddingLeft: "16px",
-                paddingTop: "5px",
-                paddingBottom: "5px",
-              }}
-            >
-              {template.params.tag.text}
-            </span>
-          </div>
-        )}
-
-        {template.params.title.text && (
-          <div
-            style={{
-              display: "flex",
-              flexGrow: 0,
-
-              fontFamily: template.params.title.fontFamily,
-              fontWeight: template.params.title.fontWeight,
-              fontSize: `${template.params.title.fontSize}px`,
-              color: template.params.title.color,
-              letterSpacing: "-0.025em",
-            }}
-          >
-            {template.params.title.text}
-          </div>
-        )}
-      </div>
-
-      {template.params.image.url && (
+      {params.logo?.url && (
         <div
           style={{
             display: "flex",
 
-            width: "100%",
-            flexGrow: 0,
+            paddingTop: "2rem",
+            paddingLeft: "2rem",
           }}
         >
           <img
             style={{
-              borderRadius: "0.75rem",
+              height: "4rem",
+              width: "4rem",
             }}
-            src={template.params.image.url}
+            src={params.logo.url}
           />
         </div>
       )}
-    </div>
 
-    {renderWatermark && (
-      <Watermark
+      <div
         style={{
-          bottom: "2rem",
-          left: "2rem",
+          display: "flex",
+          width: "100%",
+          gap: "1.5rem",
+
+          paddingLeft: "2rem",
         }}
-      />
-    )}
-  </div>
-);
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "1.5rem",
+            flexShrink: 0,
+
+            width: "50%",
+            maxWidth: "50%",
+
+            paddingTop: "4rem",
+          }}
+        >
+          {params.tag.text && (
+            <div
+              style={{
+                display: "flex",
+                flexGrow: 0,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: params.tag.fontFamily,
+                  fontWeight: params.tag.fontWeight,
+                  fontSize: `${params.tag.fontSize}px`,
+                  color: params.tag.color,
+
+                  border: "solid",
+                  borderRadius: "100",
+                  borderWidth: "2px",
+
+                  paddingRight: "16px",
+                  paddingLeft: "16px",
+                  paddingTop: "5px",
+                  paddingBottom: "5px",
+                }}
+              >
+                {params.tag.text}
+              </span>
+            </div>
+          )}
+
+          {params.title.text && (
+            <div
+              style={{
+                display: "flex",
+                flexGrow: 0,
+
+                fontFamily: params.title.fontFamily,
+                fontWeight: params.title.fontWeight,
+                fontSize: `${params.title.fontSize}px`,
+                color: params.title.color,
+                letterSpacing: "-0.025em",
+              }}
+            >
+              {params.title.text}
+            </div>
+          )}
+        </div>
+
+        {params.image.url && (
+          <div
+            style={{
+              display: "flex",
+
+              width: "100%",
+              flexGrow: 0,
+            }}
+          >
+            <img
+              style={{
+                borderRadius: "0.75rem",
+              }}
+              src={params.image.url}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

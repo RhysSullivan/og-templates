@@ -13,7 +13,7 @@ export interface Text {
 
 // Image types
 export interface Image {
-  url: string; // URL validation would need to be handled at runtime if needed
+  url: string;
 }
 
 // Canvas types
