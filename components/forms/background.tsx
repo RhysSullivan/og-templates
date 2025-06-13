@@ -511,10 +511,6 @@ export function BackgroundForm() {
           </Tabs>
 
           <div className="grid gap-2 pt-2">
-            <div className="flex justify-between">
-              <div className="text-sm font-medium">Grid Overlay</div>
-              <Badge>New</Badge>
-            </div>
             <div className="grid gap-4">
               <div className="space-y-2">
                 <Label htmlFor="width">Pattern</Label>

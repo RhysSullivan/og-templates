@@ -80,7 +80,7 @@ export default function OpenGraphImage() {
       <Separator />
 
       <div className="grid gap-x-4 gap-y-4 lg:grid-cols-3">
-        <div className="order-last col-span-1 space-y-4 lg:order-first">
+        <div className="order-last col-span-1 space-y-4 lg:order-first max-h-[calc(100vh-10rem)] overflow-y-auto">
           <BasicOGForm />
 
           <BackgroundForm />
