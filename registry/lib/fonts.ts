@@ -1,9 +1,7 @@
-import { z } from "zod"
+import { z } from "zod";
 
-import type { Template } from "./templates"
-
-const DEFAULT_WEIGHT = 400
-const DEFAULT_FONT_FAMILY = "inter"
+const DEFAULT_WEIGHT = 400;
+const DEFAULT_FONT_FAMILY = "inter";
 
 export const fontWeightSchema = z
   .union([
@@ -17,8 +15,8 @@ export const fontWeightSchema = z
     z.literal(800),
     z.literal(900),
   ])
-  .default(DEFAULT_WEIGHT)
-export type FontWeight = z.infer<typeof fontWeightSchema>
+  .default(DEFAULT_WEIGHT);
+export type FontWeight = z.infer<typeof fontWeightSchema>;
 
 export const fontFamilySchema = z
   .enum([
@@ -42,8 +40,8 @@ export const fontFamilySchema = z
     "ibm-plex-mono",
     "jetbrains-mono",
   ])
-  .default(DEFAULT_FONT_FAMILY)
-export type FontFamily = z.infer<typeof fontFamilySchema>
+  .default(DEFAULT_FONT_FAMILY);
+export type FontFamily = z.infer<typeof fontFamilySchema>;
 
 export const fontWeights = {
   100: "Thin",
@@ -55,13 +53,13 @@ export const fontWeights = {
   700: "Bold",
   800: "Extra Bold",
   900: "Black",
-} as const
+} as const;
 
 export const supportedFonts: {
-  value: FontFamily
-  label: string
-  weights: FontWeight[]
-  subset: "latin" | "japanese" | "chinese-traditional" | "chinese-simplified"
+  value: FontFamily;
+  label: string;
+  weights: FontWeight[];
+  subset: "latin" | "japanese" | "chinese-traditional" | "chinese-simplified";
 }[] = [
   {
     value: "inter",
@@ -177,48 +175,17 @@ export const supportedFonts: {
     weights: [100, 200, 300, 400, 500, 600, 700, 800],
     subset: "latin",
   },
-] as const
+] as const;
 
 export function getFontUrl({
   family,
   weight,
 }: {
-  family: FontFamily
-  weight: FontWeight
+  family: FontFamily;
+  weight: FontWeight;
 }) {
   const subset =
-    supportedFonts.find((f) => f.value === family)?.subset ?? "latin"
+    supportedFonts.find((f) => f.value === family)?.subset ?? "latin";
 
-  return `https://cdn.jsdelivr.net/fontsource/fonts/${family}@latest/${subset}-${weight}-normal.woff`
-}
-
-// getFontsFromTemplate returns a list of fonts used in a template
-export function getFontsFromTemplate(template: Template["params"]) {
-  let fonts: { family: FontFamily; weight: FontWeight }[] = []
-
-  for (const [_key, value] of Object.entries(template)) {
-    if (
-      value && // ensure the value is non-null
-      typeof value === "object" &&
-      "fontFamily" in value &&
-      "fontWeight" in value
-    ) {
-      // dedupe based on font weight and family
-      if (
-        fonts.find(
-          (font) =>
-            font.family === value.fontFamily && font.weight === value.fontWeight
-        )
-      ) {
-        continue
-      }
-
-      fonts.push({
-        family: value.fontFamily,
-        weight: value.fontWeight,
-      })
-    }
-  }
-
-  return fonts
+  return `https://cdn.jsdelivr.net/fontsource/fonts/${family}@latest/${subset}-${weight}-normal.woff`;
 }

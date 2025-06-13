@@ -1,6 +1,6 @@
 import * as React from "react";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
-import { BasicOGTemplate } from "@/registry/components/open-graph/basic";
+import { BasicOGComponent } from "@/registry/components/open-graph/basic";
 import PreviewRenderer from "./preview";
 
 // This page displays items from the custom registry.
@@ -25,36 +25,31 @@ export default function Home() {
           </div>
           <div className="flex items-center justify-center min-h-[400px] relative">
             <PreviewRenderer>
-              <BasicOGTemplate
-                template={{
-                  background: {
-                    type: "color",
-                    color: "#fff",
-                    noise: 0.5,
-                  },
-                  canvas: { width: 1200, height: 630 },
-                  params: {
-                    title: {
-                      text: "Hello World",
-                      fontFamily: "inter",
-                      fontWeight: 700,
-                      fontSize: 52,
-                      color: "#fff",
-                    },
-                    description: {
-                      text: "This is a description",
-                      fontFamily: "inter",
-                      fontWeight: 400,
-                      fontSize: 30,
-                      color: "#fff",
-                    },
-                    logo: {
-                      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/2048px-SVG_Logo.svg.png",
-                    },
-                  },
-                  name: "og:basic",
+              <BasicOGComponent
+                background={{
+                  type: "color",
+                  color: "#fff",
+                  noise: 0.5,
                 }}
-                renderWatermark={false}
+                canvas={{ width: 1200, height: 630 }}
+                title={{
+                  text: "Hello World",
+                  fontFamily: "inter",
+                  fontWeight: 700,
+                  fontSize: 52,
+                  color: "#fff",
+                }}
+                description={{
+                  text: "This is a description",
+                  fontFamily: "inter",
+                  fontWeight: 400,
+                  fontSize: 30,
+                  color: "#fff",
+                }}
+                logo={{
+                  url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/2048px-SVG_Logo.svg.png",
+                }}
+                renderWatermark={true}
               />
             </PreviewRenderer>
           </div>

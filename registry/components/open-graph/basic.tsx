@@ -1,80 +1,72 @@
 import { patterns } from "@/registry/lib/patterns";
-import { BasicTemplate } from "@/registry/lib/templates/open-graph/basic";
-import { toBackgroundShorthand } from "@/registry/lib/templates/elements/background";
 import { Watermark } from "@/registry/components/elements/watermark";
 import { NOISE_IMAGE } from "@/registry/lib/noise";
+import { ImageResponse } from "next/og";
+import { loadGoogleFont } from "@/registry/lib/load-google-font";
+import {
+  canvasDefault,
+  TemplateParams,
+  toBackgroundShorthand,
+} from "@/registry/lib/parameters";
 
-export const BasicOGTemplate = ({
-  template,
-  renderWatermark,
-}: {
-  template: BasicTemplate;
-  renderWatermark: boolean;
-}) => (
-  <div
-    style={{
-      width: template.canvas.width,
-      height: template.canvas.height,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-      textAlign: "center",
-      background: toBackgroundShorthand(template.background),
-    }}
-  >
+export const BasicOGComponent = (params: TemplateParams) => {
+  const canvas = params.canvas ?? canvasDefault;
+  const background = params.background ?? {
+    type: "color",
+    color: "#fff",
+    noise: 0.5,
+  };
+  const title = params.title;
+  const description = params.description;
+  const logo = params.logo;
+  const renderWatermark = params.renderWatermark;
+
+  return (
     <div
       style={{
-        height: "100%",
-        width: "100%",
-        position: "absolute",
-        inset: 0,
-        filter: "brightness(100%) contrast(150%)",
-        opacity: template.background.noise,
-        backgroundImage: NOISE_IMAGE,
-        backgroundRepeat: "repeat",
+        width: canvas.width,
+        height: canvas.height,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        background: toBackgroundShorthand(background),
       }}
-    ></div>
-
-    {template.background.gridOverlay && (
+    >
       <div
         style={{
           height: "100%",
           width: "100%",
           position: "absolute",
-          backgroundImage: `url('${patterns[
-            template.background.gridOverlay.pattern
-          ].svg({
-            color: template.background.gridOverlay.color,
-            opacity: template.background.gridOverlay.opacity,
-          })}')`,
-          maskImage:
-            template.background.gridOverlay.blurRadius > 0
-              ? `radial-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) ${
-                  100 - template.background.gridOverlay.blurRadius
-                }%)`
-              : "none",
+          inset: 0,
+          filter: "brightness(100%) contrast(150%)",
+          opacity: background.noise,
+          backgroundImage: NOISE_IMAGE,
+          backgroundRepeat: "repeat",
         }}
       ></div>
-    )}
 
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "0.75rem",
-      }}
-    >
-      {template.params.logo?.url && (
-        // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-        <img
+      {background.gridOverlay && (
+        <div
           style={{
-            width: "6rem",
-            height: "6rem",
+            height: "100%",
+            width: "100%",
+            position: "absolute",
+            backgroundImage: `url('${patterns[
+              background.gridOverlay.pattern
+            ].svg({
+              color: background.gridOverlay.color,
+              opacity: background.gridOverlay.opacity,
+            })}')`,
+            maskImage:
+              background.gridOverlay.blurRadius > 0
+                ? `radial-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) ${
+                    100 - background.gridOverlay.blurRadius
+                  }%)`
+                : "none",
           }}
-          src={template.params.logo?.url}
-        />
+        ></div>
       )}
 
       <div
@@ -82,45 +74,82 @@ export const BasicOGTemplate = ({
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "0.25rem",
+          gap: "0.75rem",
         }}
       >
-        {template.params.title.text && (
-          <div
+        {logo?.url && (
+          // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+          <img
             style={{
-              fontFamily: template.params.title.fontFamily,
-              fontWeight: template.params.title.fontWeight,
-              fontSize: `${template.params.title.fontSize}px`,
-              color: template.params.title.color,
-              letterSpacing: "-0.025em",
+              width: "6rem",
+              height: "6rem",
             }}
-          >
-            {template.params.title.text}
-          </div>
+            src={logo?.url}
+          />
         )}
 
-        {template.params.description.text && (
-          <div
-            style={{
-              fontFamily: template.params.description.fontFamily,
-              fontWeight: template.params.description.fontWeight,
-              fontSize: `${template.params.description.fontSize}px`,
-              color: template.params.description.color,
-            }}
-          >
-            {template.params.description.text}
-          </div>
-        )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.25rem",
+          }}
+        >
+          {title.text && (
+            <div
+              style={{
+                fontFamily: title.fontFamily,
+                fontWeight: title.fontWeight,
+                fontSize: `${title.fontSize}px`,
+                color: title.color,
+                letterSpacing: "-0.025em",
+              }}
+            >
+              {title.text}
+            </div>
+          )}
+
+          {description.text && (
+            <div
+              style={{
+                fontFamily: description.fontFamily,
+                fontWeight: description.fontWeight,
+                fontSize: `${description.fontSize}px`,
+                color: description.color,
+              }}
+            >
+              {description.text}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
 
-    {renderWatermark && (
-      <Watermark
-        style={{
-          bottom: "2rem",
-          right: "2rem",
-        }}
-      />
-    )}
-  </div>
-);
+      {renderWatermark && (
+        <Watermark
+          style={{
+            bottom: "2rem",
+            right: "2rem",
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
+export async function BasicOG(params: TemplateParams) {
+  return new ImageResponse(<BasicOGComponent {...params} />, {
+    width: params.canvas?.width ?? canvasDefault.width,
+    height: params.canvas?.height ?? canvasDefault.height,
+    fonts: [
+      {
+        name: "Geist",
+        data: await loadGoogleFont(
+          "Geist",
+          `${params.title.text} ${params.description.text}`
+        ),
+        style: "normal",
+      },
+    ],
+  });
+}

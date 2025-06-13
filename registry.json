@@ -8,7 +8,7 @@
       "type": "registry:component",
       "title": "Basic Open Graph",
       "description": "A basic Open Graph template",
-      "dependencies": ["zod"],
+      "dependencies": [],
       "files": [
         {
           "path": "registry/components/open-graph/basic.tsx",
@@ -19,20 +19,20 @@
           "type": "registry:lib"
         },
         {
-          "path": "registry/lib/templates/open-graph/basic.ts",
-          "type": "registry:lib"
-        },
-        {
-          "path": "registry/lib/templates/elements/background.ts",
-          "type": "registry:lib"
-        },
-        {
           "path": "registry/lib/url.ts",
           "type": "registry:lib"
         },
         {
           "path": "registry/components/elements/watermark.tsx",
           "type": "registry:component"
+        },
+        {
+          "path": "registry/lib/noise.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/load-google-font.ts",
+          "type": "registry:lib"
         }
       ]
     }
