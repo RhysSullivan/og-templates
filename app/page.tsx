@@ -49,7 +49,7 @@ export default function Home() {
   const { template } = useTemplateStore();
   const info = templates[selectedTemplate];
 
-  const shadcnCommand = `bunx --bun shadcn@latest add ${process.env.NEXT_PUBLIC_BASE_URL}/r/${selectedTemplate}.json`;
+  const shadcnCommand = `bunx --bun shadcn@latest add ${process.env.NEXT_PUBLIC_BASE_URL}r/${selectedTemplate}.json`;
   const usageCode = `import { ${
     info.componentName
   } } from "@/components/open-graph/${selectedTemplate}";
