@@ -10,6 +10,7 @@
     "registry:build": "shadcn build"
   },
   "dependencies": {
+    "@radix-ui/react-aspect-ratio": "^1.1.7",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.1",
     "@tanstack/react-query": "^5.64.1",
@@ -20,6 +21,7 @@
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "satori": "^0.14.0",
     "shadcn": "2.4.0-canary.12",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
@@ -35,5 +37,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531"
 }

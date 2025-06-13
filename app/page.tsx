@@ -1,8 +1,7 @@
-import * as React from "react"
-import { OpenInV0Button } from "@/components/open-in-v0-button"
-import { HelloWorld } from "@/registry/new-york/hello-world/hello-world"
-import { ExampleForm } from "@/registry/new-york/example-form/example-form"
-import PokemonPage from "@/registry/new-york/complex-component/page"
+import * as React from "react";
+import { OpenInV0Button } from "@/components/open-in-v0-button";
+import { BasicOGTemplate } from "@/registry/components/open-graph/basic";
+import PreviewRenderer from "./preview";
 
 // This page displays items from the custom registry.
 // You are free to implement this with your own design as needed.
@@ -25,10 +24,42 @@ export default function Home() {
             <OpenInV0Button name="hello-world" className="w-fit" />
           </div>
           <div className="flex items-center justify-center min-h-[400px] relative">
-            <HelloWorld />
+            <PreviewRenderer>
+              <BasicOGTemplate
+                template={{
+                  background: {
+                    type: "color",
+                    color: "#fff",
+                    noise: 0.5,
+                  },
+                  canvas: { width: 1200, height: 630 },
+                  params: {
+                    title: {
+                      text: "Hello World",
+                      fontFamily: "inter",
+                      fontWeight: 700,
+                      fontSize: 52,
+                      color: "#fff",
+                    },
+                    description: {
+                      text: "This is a description",
+                      fontFamily: "inter",
+                      fontWeight: 400,
+                      fontSize: 30,
+                      color: "#fff",
+                    },
+                    logo: {
+                      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/SVG_Logo.svg/2048px-SVG_Logo.svg.png",
+                    },
+                  },
+                  name: "og:basic",
+                }}
+                renderWatermark={false}
+              />
+            </PreviewRenderer>
           </div>
         </div>
-
+        {/* 
         <div className="flex flex-col gap-4 border rounded-lg p-4 min-h-[450px] relative">
           <div className="flex items-center justify-between">
             <h2 className="text-sm text-muted-foreground sm:pl-3">
@@ -51,8 +82,8 @@ export default function Home() {
           <div className="flex items-center justify-center min-h-[400px] relative">
             <PokemonPage />
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
-  )
+  );
 }
