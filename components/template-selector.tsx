@@ -15,29 +15,38 @@ import {
   ImageRightSkeleton,
   LogosSkeleton,
 } from "@/components/skeletons";
-
-const templates = [
-  {
+import { BasicOGComponent } from "@/registry/components/open-graph/basic";
+import { NoticeOGTemplate } from "@/registry/components/open-graph/notice";
+import { HeroOGComponent } from "@/registry/components/open-graph/hero";
+import { ImageRightOGTemplate } from "@/registry/components/open-graph/image-right";
+import { LogosOGTemplate } from "@/registry/components/open-graph/logos";
+export const templates = {
+  basic: {
     skeleton: <BasicSkeleton />,
-    tag: "basic",
+    component: BasicOGComponent,
+    componentName: "BasicOGComponent",
   },
-  {
+  notice: {
     skeleton: <NoticeSkeleton />,
-    tag: "notice",
+    component: NoticeOGTemplate,
+    componentName: "NoticeOGComponent",
   },
-  {
+  hero: {
     skeleton: <HeroSkeleton />,
-    tag: "hero",
+    component: HeroOGComponent,
+    componentName: "HeroOGComponent",
   },
-  {
+  "image-right": {
     skeleton: <ImageRightSkeleton />,
-    tag: "image-right",
+    component: ImageRightOGTemplate,
+    componentName: "ImageRightOGComponent",
   },
-  {
+  logos: {
     skeleton: <LogosSkeleton />,
-    tag: "logos",
+    component: LogosOGTemplate,
+    componentName: "LogosOGComponent",
   },
-];
+} as const;
 
 export default function TemplateSelector(props: {
   selectedTemplate: string;
@@ -59,26 +68,26 @@ export default function TemplateSelector(props: {
           }}
         >
           <CarouselContent>
-            {templates.map((t) => (
+            {Object.entries(templates).map(([key, t]) => (
               <CarouselItem
-                key={t.tag}
+                key={key}
                 className="basis-40 md:basis-64 lg:basis-1/5"
                 onClick={() => {
-                  console.log("clicked", t.tag);
-                  props.setSelectedTemplate(t.tag);
+                  console.log("clicked", key);
+                  props.setSelectedTemplate(key);
                 }}
               >
                 <RadioGroupItem
-                  value={t.tag}
-                  id={t.tag}
+                  value={key}
+                  id={key}
                   onClick={() => {
-                    console.log("clicked", t.tag);
-                    props.setSelectedTemplate(t.tag);
+                    console.log("clicked", key);
+                    props.setSelectedTemplate(key);
                   }}
                   className="peer sr-only"
                 />
                 <Label
-                  htmlFor={t.tag}
+                  htmlFor={key}
                   className="flex aspect-video max-h-24 items-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary sm:max-h-32 [&:has([data-state=checked])]:border-primary"
                 >
                   {t.skeleton}

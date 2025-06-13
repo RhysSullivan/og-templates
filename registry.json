@@ -33,6 +33,10 @@
         {
           "path": "registry/lib/parameters.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/render.ts",
+          "type": "registry:lib"
         }
       ]
     },
@@ -65,6 +69,10 @@
         },
         {
           "path": "registry/lib/parameters.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/render.ts",
           "type": "registry:lib"
         }
       ]
@@ -99,6 +107,10 @@
         {
           "path": "registry/lib/parameters.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/render.ts",
+          "type": "registry:lib"
         }
       ]
     },
@@ -132,6 +144,10 @@
         {
           "path": "registry/lib/parameters.ts",
           "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/render.ts",
+          "type": "registry:lib"
         }
       ]
     },
@@ -164,6 +180,10 @@
         },
         {
           "path": "registry/lib/parameters.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/render.ts",
           "type": "registry:lib"
         }
       ]

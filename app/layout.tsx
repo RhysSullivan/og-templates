@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <main className="mx-auto min-h-[calc(100dvh-84px)] max-w-7xl px-2 py-6 sm:px-6 lg:px-8">
           <TemplateStoreProvider>{children}</TemplateStoreProvider>

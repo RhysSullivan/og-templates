@@ -18,7 +18,8 @@ export type BasicOGTemplateParams = {
   logo?: Image;
 };
 
-export const BasicOGComponent = (params: BasicOGTemplateParams) => {
+export const BasicOGComponent = (props: { params: BasicOGTemplateParams }) => {
+  const { params } = props;
   const canvas = params.canvas ?? canvasDefault;
   const background = params.background ?? backgroundDefault;
   const title = params.title;

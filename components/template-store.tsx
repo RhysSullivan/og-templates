@@ -40,9 +40,11 @@ export function TemplateStoreProvider({
         fontSize: 60,
         color: "#030712",
       },
-      logo: {
-        url: "/samples/logos/ognew.svg",
+      canvas: {
+        width: 1200,
+        height: 630,
       },
+
       background: {
         type: "linear-gradient",
         direction: "to top right",

@@ -19,7 +19,7 @@ export default function PreviewRenderer() {
   useEffect(() => {
     const Template = templates[template.type];
     async function renderSvg() {
-      return await satori(Template(template.params), {
+      return await satori(Template({ params: template.params }), {
         // debug: process.env.NODE_ENV === "development",
         width: 1200,
         height: 630,
