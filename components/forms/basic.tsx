@@ -30,16 +30,8 @@ export function BasicOGForm() {
                   id="title"
                   value={template.params.title.text}
                   onChange={(e) => {
-                    setTemplate({
-                      ...template,
-                      params: {
-                        ...template.params,
-                        title: {
-                          ...template.params.title,
-                          text: e.target.value,
-                        },
-                      },
-                    });
+                    template.params.title.text = e.target.value;
+                    setTemplate(template);
                   }}
                 />
               </div>
@@ -52,16 +44,8 @@ export function BasicOGForm() {
                   id="description"
                   value={template.params.description.text}
                   onChange={(e) => {
-                    setTemplate({
-                      ...template,
-                      params: {
-                        ...template.params,
-                        description: {
-                          ...template.params.description,
-                          text: e.target.value,
-                        },
-                      },
-                    });
+                    template.params.description.text = e.target.value;
+                    setTemplate(template);
                   }}
                 />
               </div>

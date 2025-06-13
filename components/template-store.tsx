@@ -3,6 +3,34 @@
 import { BasicOGTemplateParams } from "@/registry/components/open-graph/basic";
 import { NoticeOGTemplateParams } from "@/registry/components/open-graph/notice";
 import { createContext, useContext, useState } from "react";
+
+// Deep clone utility function
+function deepClone<T>(obj: T): T {
+  if (obj === null || typeof obj !== "object") {
+    return obj;
+  }
+
+  if (obj instanceof Date) {
+    return new Date(obj.getTime()) as T;
+  }
+
+  if (obj instanceof Array) {
+    return obj.map((item) => deepClone(item)) as T;
+  }
+
+  if (typeof obj === "object") {
+    const clonedObj = {} as T;
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clonedObj[key] = deepClone(obj[key]);
+      }
+    }
+    return clonedObj;
+  }
+
+  return obj;
+}
+
 type TemplateForm =
   | {
       type: "basic";
@@ -23,7 +51,7 @@ export function TemplateStoreProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [template, setTemplate] = useState<TemplateForm>({
+  const [template, setTemplateState] = useState<TemplateForm>({
     type: "basic",
     params: {
       description: {
@@ -63,6 +91,11 @@ export function TemplateStoreProvider({
       },
     },
   });
+
+  // Wrapper function that automatically deep clones the template
+  const setTemplate = (newTemplate: TemplateForm) => {
+    setTemplateState(deepClone(newTemplate));
+  };
 
   return (
     <TemplateStore.Provider value={{ template, setTemplate }}>
