@@ -10,7 +10,7 @@ import {
   backgroundDefault,
 } from "@/registry/lib/parameters";
 
-type TemplateParams = {
+export type NoticeOGTemplateParams = {
   canvas?: CanvasParams;
   background?: BackgroundParams;
   description: Text;
@@ -18,7 +18,7 @@ type TemplateParams = {
   logo?: Image;
 };
 
-export const NoticeOGTemplate = (params: TemplateParams) => {
+export const NoticeOGTemplate = (params: NoticeOGTemplateParams) => {
   const canvas = params.canvas ?? canvasDefault;
   const background = params.background ?? backgroundDefault;
 

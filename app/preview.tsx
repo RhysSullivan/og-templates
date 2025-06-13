@@ -3,17 +3,23 @@ import satori from "satori";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useEffect, useState } from "react";
+import { useTemplateStore } from "@/components/template-store";
+import { BasicOGComponent } from "@/registry/components/open-graph/basic";
+import { NoticeOGTemplate } from "@/registry/components/open-graph/notice";
 
-export default function PreviewRenderer({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const templates = {
+  basic: BasicOGComponent,
+  notice: NoticeOGTemplate,
+};
+
+export default function PreviewRenderer() {
+  const { template } = useTemplateStore();
   const [svg, setSvg] = useState<string | null>(null);
 
   useEffect(() => {
+    const Template = templates[template.type];
     async function renderSvg() {
-      return await satori(children, {
+      return await satori(Template(template.params), {
         // debug: process.env.NODE_ENV === "development",
         width: 1200,
         height: 630,
@@ -30,7 +36,7 @@ export default function PreviewRenderer({
       });
     }
     renderSvg().then((svg) => setSvg(svg));
-  }, [children]);
+  }, [template]);
 
   if (!svg) return null;
   return (
