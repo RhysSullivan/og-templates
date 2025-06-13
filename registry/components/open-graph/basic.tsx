@@ -1,25 +1,20 @@
 import { patterns } from "@/registry/lib/patterns";
-import { Watermark } from "@/registry/components/elements/watermark";
 import { NOISE_IMAGE } from "@/registry/lib/noise";
 import { ImageResponse } from "next/og";
 import { loadGoogleFont } from "@/registry/lib/load-google-font";
 import {
   canvasDefault,
+  backgroundDefault,
   TemplateParams,
   toBackgroundShorthand,
 } from "@/registry/lib/parameters";
 
 export const BasicOGComponent = (params: TemplateParams) => {
   const canvas = params.canvas ?? canvasDefault;
-  const background = params.background ?? {
-    type: "color",
-    color: "#fff",
-    noise: 0.5,
-  };
+  const background = params.background ?? backgroundDefault;
   const title = params.title;
   const description = params.description;
   const logo = params.logo;
-  const renderWatermark = params.renderWatermark;
 
   return (
     <div
@@ -124,15 +119,6 @@ export const BasicOGComponent = (params: TemplateParams) => {
           )}
         </div>
       </div>
-
-      {renderWatermark && (
-        <Watermark
-          style={{
-            bottom: "2rem",
-            right: "2rem",
-          }}
-        />
-      )}
     </div>
   );
 };

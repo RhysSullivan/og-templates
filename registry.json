@@ -23,15 +23,15 @@
           "type": "registry:lib"
         },
         {
-          "path": "registry/components/elements/watermark.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "registry/lib/noise.ts",
           "type": "registry:lib"
         },
         {
           "path": "registry/lib/load-google-font.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/parameters.ts",
           "type": "registry:lib"
         }
       ]

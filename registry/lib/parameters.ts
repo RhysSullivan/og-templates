@@ -30,6 +30,12 @@ export const canvasDefault: CanvasParams = {
   height: DEFAULT_HEIGHT,
 };
 
+export const backgroundDefault: BackgroundParams = {
+  type: "color",
+  color: "#fff",
+  noise: 0.5,
+};
+
 // Background types
 export interface GridOverlayParams {
   pattern: "grid" | "graph-paper" | "dots";
@@ -87,5 +93,4 @@ export type TemplateParams = {
   title: Text;
   description: Text;
   logo?: Image;
-  renderWatermark?: boolean;
 };
