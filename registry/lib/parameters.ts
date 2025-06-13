@@ -86,11 +86,3 @@ export function toBackgroundShorthand(
     }, ${background.colorStops.join(", ")})`;
   }
 }
-
-export type TemplateParams = {
-  canvas?: CanvasParams;
-  background?: BackgroundParams;
-  title: Text;
-  description: Text;
-  logo?: Image;
-};

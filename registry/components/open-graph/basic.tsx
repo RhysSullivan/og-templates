@@ -1,15 +1,24 @@
 import { patterns } from "@/registry/lib/patterns";
 import { NOISE_IMAGE } from "@/registry/lib/noise";
-import { ImageResponse } from "next/og";
-import { loadGoogleFont } from "@/registry/lib/load-google-font";
 import {
   canvasDefault,
   backgroundDefault,
-  TemplateParams,
+  BackgroundParams,
+  CanvasParams,
+  Text,
+  Image,
   toBackgroundShorthand,
 } from "@/registry/lib/parameters";
 
-export const BasicOGComponent = (params: TemplateParams) => {
+export type BasicOGTemplateParams = {
+  canvas?: CanvasParams;
+  background?: BackgroundParams;
+  title: Text;
+  description: Text;
+  logo?: Image;
+};
+
+export const BasicOGComponent = (params: BasicOGTemplateParams) => {
   const canvas = params.canvas ?? canvasDefault;
   const background = params.background ?? backgroundDefault;
   const title = params.title;
@@ -73,7 +82,6 @@ export const BasicOGComponent = (params: TemplateParams) => {
         }}
       >
         {logo?.url && (
-          // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
           <img
             style={{
               width: "6rem",
@@ -122,20 +130,3 @@ export const BasicOGComponent = (params: TemplateParams) => {
     </div>
   );
 };
-
-export async function BasicOG(params: TemplateParams) {
-  return new ImageResponse(<BasicOGComponent {...params} />, {
-    width: params.canvas?.width ?? canvasDefault.width,
-    height: params.canvas?.height ?? canvasDefault.height,
-    fonts: [
-      {
-        name: "Geist",
-        data: await loadGoogleFont(
-          "Geist",
-          `${params.title.text} ${params.description.text}`
-        ),
-        style: "normal",
-      },
-    ],
-  });
-}

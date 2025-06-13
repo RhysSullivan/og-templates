@@ -10,7 +10,7 @@ import {
 } from "@/registry/lib/parameters";
 import { absoluteUrl } from "@/registry/lib/url";
 
-type TemplateParams = {
+export type HeroOGTemplateParams = {
   canvas?: CanvasParams;
   background?: BackgroundParams;
   tag: Text;
@@ -18,7 +18,7 @@ type TemplateParams = {
   image: Image;
 };
 
-export const HeroOGComponent = (params: TemplateParams) => {
+export const HeroOGComponent = (params: HeroOGTemplateParams) => {
   const canvas = params.canvas ?? canvasDefault;
   const background = params.background ?? backgroundDefault;
 

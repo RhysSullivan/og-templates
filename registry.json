@@ -35,6 +35,138 @@
           "type": "registry:lib"
         }
       ]
+    },
+    {
+      "name": "hero",
+      "type": "registry:component",
+      "title": "Hero Open Graph",
+      "description": "A hero-style Open Graph template with tag, title, and featured image",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/components/open-graph/hero.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/lib/patterns.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/url.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/noise.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/load-google-font.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/parameters.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "image-right",
+      "type": "registry:component",
+      "title": "Image Right Open Graph",
+      "description": "An Open Graph template with content on the left and image on the right",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/components/open-graph/image-right.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/lib/patterns.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/url.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/noise.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/load-google-font.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/parameters.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "logos",
+      "type": "registry:component",
+      "title": "Logos Open Graph",
+      "description": "An Open Graph template showcasing multiple logos",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/components/open-graph/logos.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/lib/patterns.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/url.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/noise.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/load-google-font.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/parameters.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "notice",
+      "type": "registry:component",
+      "title": "Notice Open Graph",
+      "description": "A notice-style Open Graph template with logo and content side by side",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/components/open-graph/notice.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/lib/patterns.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/url.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/noise.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/load-google-font.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/lib/parameters.ts",
+          "type": "registry:lib"
+        }
+      ]
     }
   ]
 }
